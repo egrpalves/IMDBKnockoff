@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Movie } from '../interfaces/movie';
 import { ServerService } from '../services/server.service';
 import { StorageService } from '../services/storage.service';
@@ -9,14 +10,20 @@ import { StorageService } from '../services/storage.service';
     styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
-    public searchDetails: Movie[] = [];
+    public searchDetails: Movie[];
     public favorites: Movie[];
-    public searchValue: string = '';
+    public searchValue: string;
     public displayedColumns: string[] = ['title', 'year', 'commands'];
     public searchErrorMessage: string = '';
 
-    constructor(public server: ServerService<Movie[]>, public storage: StorageService) {
+    constructor(
+        public server: ServerService<Movie[]>,
+        public storage: StorageService,
+        private router: Router
+    ) {
         this.favorites = this.storage.retrieve('favorites') || [];
+        this.searchDetails = this.storage.retrieve('search') || [];
+        this.searchValue = this.storage.retrieve('searchValue') || '';
     }
 
     ngOnInit(): void {}
@@ -25,6 +32,8 @@ export class MoviesComponent implements OnInit {
         this.server.getMovie(searchValue).subscribe((data: any) => {
             if (data.Response === 'True') {
                 this.searchDetails = data.Search;
+                this.storage.store('search', this.searchDetails);
+                this.storage.store('searchValue', searchValue);
             } else {
                 this.searchErrorMessage = 'MOVIES.NO_RESULTS';
                 this.searchDetails = [];
@@ -40,8 +49,6 @@ export class MoviesComponent implements OnInit {
     }
 
     public movieDetails(movie: Movie): void {
-        this.server.getMovieDetails(movie.imdbID).subscribe((data: any) => {
-            console.log(data);
-        });
+        this.router.navigate(['/movies', movie.imdbID]);
     }
 }
