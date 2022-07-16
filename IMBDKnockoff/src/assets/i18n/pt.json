@@ -1,1 +1,10 @@
-{}
+{
+    "IMDBKNOCKOFF": "IMDBKnockoff",
+    "NAV": {
+        "MOVIES": "Filmes"
+    },
+    "MOVIES": {
+        "SEARCH": "Pesquisar",
+        "SEARCH_EXAMPLE": "Ex.: Star Wars"
+    }
+}
