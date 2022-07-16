@@ -13,9 +13,10 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
 
 @NgModule({
-    declarations: [AppComponent, MoviesComponent, MovieDetailsComponent, NavbarComponent],
+    declarations: [AppComponent, MoviesComponent, MovieDetailsComponent, NavbarComponent, FavoriteCardComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

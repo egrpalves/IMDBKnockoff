@@ -42,14 +42,17 @@
                 <tr
                     mat-row
                     *matRowDef="let row; columns: displayedColumns"
-                    (click)="movieDetails(row)"
+                    (click)="movieDetails($event, row)"
                 ></tr>
             </table>
         </div>
-        <div class="col-md-3 col-12 text-light" *ngIf="favorites.length > 0">
-            <h5>{{ 'MOVIES.FAVORITES' | translate }}</h5>
+        <div class="col-md-3 col-12 text-light">
+            <h3>{{ 'MOVIES.FAVORITES' | translate }}</h3>
             <div class="row" *ngFor="let favorite of favorites">
-                <span>{{ favorite.Title }}</span>
+                <favorite-card
+                    [movie]="favorite"
+                    (removeFavoriteEvent)="removeFavorite($event)"
+                ></favorite-card>
             </div>
         </div>
     </div>

@@ -42,13 +42,22 @@ export class MoviesComponent implements OnInit {
     }
 
     public addRemoveFavorite(movie: Movie): void {
-        this.favorites = this.favorites.includes(movie)
-            ? this.favorites.filter((item) => item !== movie)
-            : [...this.favorites, movie];
+        if (this.favorites.some((item) => item.imdbID === movie.imdbID)) {
+            this.removeFavorite(movie);
+        } else {
+            this.favorites.push(movie);
+        }
+
         this.storage.store('favorites', this.favorites);
     }
 
-    public movieDetails(movie: Movie): void {
-        this.router.navigate(['/movies', movie.imdbID]);
+    public movieDetails(event: any, movie: Movie): void {
+        if (event.srcElement.classList[0] !== 'btn') {
+            this.router.navigate(['/movies', movie.imdbID]);
+        }
+    }
+
+    removeFavorite(movie: any): void {
+        this.favorites = this.favorites.filter((item) => item.imdbID !== movie.imdbID);
     }
 }

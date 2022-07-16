@@ -1,5 +1,8 @@
 .container {
     padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 
     .search-container {
         display: flex;
