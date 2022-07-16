@@ -11,6 +11,7 @@
             "YEAR": "Year",
             "TYPE": "Type"
         },
-        "FAVORITES": "Favorites"
+        "FAVORITES": "Favorites",
+        "NO_RESULTS": "No results found"
     }
 }
