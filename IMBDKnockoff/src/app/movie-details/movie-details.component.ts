@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MovieDetails } from '../interfaces/movie-details';
+import { MovieDetails } from '../interfaces/movie';
 import { ServerService } from '../services/server.service';
 
 @Component({
@@ -9,7 +9,33 @@ import { ServerService } from '../services/server.service';
     styleUrls: ['./movie-details.component.scss'],
 })
 export class MovieDetailsComponent implements OnInit {
-    public movieDetails: MovieDetails = {};
+    public movieDetails: MovieDetails = {
+        Actors: '',
+        Awards: '',
+        BoxOffice: '',
+        Country: '',
+        DVD: '',
+        Director: '',
+        Genre: '',
+        Language: '',
+        Metascore: '',
+        Plot: '',
+        Poster: '',
+        Production: '',
+        Rated: '',
+        Ratings: [],
+        Released: '',
+        Response: '',
+        Runtime: '',
+        Type: '',
+        Website: '',
+        Writer: '',
+        imdbRating: '',
+        imdbVotes: '',
+        Title: '',
+        Year: '',
+        imdbID: '',
+    };
 
     constructor(
         public server: ServerService<MovieDetails>,
@@ -18,10 +44,11 @@ export class MovieDetailsComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        const id = Number(this.route.snapshot.paramMap.get('id'));
+        const id = this.route.snapshot.paramMap.get('id') ?? '';
 
         this.server.getMovieDetails(id).subscribe((data: any) => {
             this.movieDetails = data;
+            console.log(this.movieDetails);
         });
     }
 }

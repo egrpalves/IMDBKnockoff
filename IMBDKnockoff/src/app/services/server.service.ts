@@ -14,7 +14,7 @@ export class ServerService<T> {
         return this.http.get<T>(`${this.serverUrl}s=${search}&type=movie`);
     }
 
-    public getMovieDetails(id: number): Observable<T> {
+    public getMovieDetails(id: string): Observable<T> {
         return this.http.get<T>(`${this.serverUrl}i=${id}`);
     }
 }
