@@ -14,6 +14,55 @@
     </form>
     <div class="row">
         <div class="col-md-8 col-12 text-light search-results-container">
+            <div class="row" *ngIf="searchDetails.length === 0 && searchErrorMessage.length === 0">
+                <div class="row suggested-header">
+                    {{ 'MOVIES.SUGGESTED' | translate }}
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-12 movie-card" *ngFor="let movie of suggestedMovies">
+                        <img
+                            class="movie-poster"
+                            src="{{ movie.Poster }}"
+                            alt="{{ movie.Title }}"
+                        />
+                        <div class="movie-card-body">
+                            <h5 class="card-title">{{ movie.Title }}</h5>
+                            <div class="row action-buttons">
+                                <div
+                                    class="col-md-6 col-12 d-flex justify-content-center"
+                                    (click)="toggleFavorite(movie)"
+                                >
+                                    <mat-icon
+                                        [attr.title]="
+                                            (movie.Favorite
+                                                ? 'MOVIES.SET_AS.UNFAVORITE'
+                                                : 'MOVIES.SET_AS.FAVORITE'
+                                            ) | translate
+                                        "
+                                        >{{
+                                            movie.Favorite ? 'favorite' : 'favorite_border'
+                                        }}</mat-icon
+                                    >
+                                </div>
+                                <div
+                                    class="col-md-6 col-12 d-flex justify-content-center"
+                                    (click)="toggleWatched(movie)"
+                                >
+                                    <mat-icon
+                                        [attr.title]="
+                                            (movie.Watched
+                                                ? 'MOVIES.SET_AS.UNWATCHED'
+                                                : 'MOVIES.SET_AS.WATCHED'
+                                            ) | translate
+                                        "
+                                        >{{ movie.Watched ? 'close' : 'done' }}</mat-icon
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row" *ngIf="searchDetails.length === 0 && searchErrorMessage.length > 0">
                 <div class="col-12">
                     <h5>
@@ -27,7 +76,7 @@
                 </div>
                 <div
                     class="col-md-7 col-12 offset-md-1 d-flex align-items-center link"
-                    (click)="movieDetails($event, result)"
+                    (click)="movieDetails(result)"
                 >
                     <span>{{ result.Title }} ({{ result.Year }})</span>
                 </div>
@@ -70,7 +119,7 @@
                 <div class="row favorite-card" *ngFor="let favorite of favorites">
                     <div
                         class="col-md-10 col-12 d-flex align-items-center link"
-                        (click)="movieDetails($event, favorite)"
+                        (click)="movieDetails(favorite)"
                     >
                         <span>{{ favorite.Title }} ({{ favorite.Year }})</span>
                     </div>
@@ -89,7 +138,7 @@
                 <div class="row watched-card" *ngFor="let movie of watchedMovies">
                     <div
                         class="col-md-10 col-12 d-flex align-items-center link"
-                        (click)="movieDetails($event, movie)"
+                        (click)="movieDetails(movie)"
                     >
                         <span>{{ movie.Title }} ({{ movie.Year }})</span>
                     </div>

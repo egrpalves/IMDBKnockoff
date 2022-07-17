@@ -39,6 +39,7 @@
             "UNWATCHED": "Set as unwatched",
             "FAVORITE": "Add as favorite",
             "UNFAVORITE": "Remove from favorites"
-        }
+        },
+        "SUGGESTED": "Suggested movies"
     }
 }
