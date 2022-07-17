@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Movie } from '../interfaces/movie';
 import { ServerService } from '../services/server.service';
 import { StorageService } from '../services/storage.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-movies',
@@ -24,8 +23,7 @@ export class MoviesComponent implements OnInit {
     constructor(
         public server: ServerService,
         public storage: StorageService,
-        private router: Router,
-        private snackbar: MatSnackBar
+        private router: Router
     ) {
         this.favorites = this.storage.retrieve('favorites') || [];
         this.watchedMovies = this.storage.retrieve('watchedMovies') || [];
