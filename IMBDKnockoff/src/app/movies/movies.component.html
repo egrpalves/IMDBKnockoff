@@ -13,7 +13,7 @@
         </button>
     </form>
     <div class="row">
-        <div class="col-md-9 col-12 text-light search-results-container">
+        <div class="col-md-8 col-12 text-light search-results-container">
             <div class="row" *ngIf="searchDetails.length === 0 && searchErrorMessage.length > 0">
                 <div class="col-12">
                     <h5>
@@ -25,27 +25,78 @@
                 <div class="col-md-1 col-12">
                     <img class="poster" src="{{ result.Poster }}" alt="{{ result.Title }}" />
                 </div>
-                <div class="col-md-8 col-12 offset-md-1 d-flex align-items-center">
-                    <div class="link" (click)="movieDetails($event, result)">
-                        <span>{{ result.Title }}</span>
-                        <span class="ms-2">({{ result.Year }})</span>
-                    </div>
+                <div
+                    class="col-md-7 col-12 offset-md-1 d-flex align-items-center link"
+                    (click)="movieDetails($event, result)"
+                >
+                    <span>{{ result.Title }} ({{ result.Year }})</span>
                 </div>
                 <div
                     class="col-md-1 col-12 d-flex align-items-center"
-                    (click)="addRemoveFavorite(result)"
+                    (click)="toggleFavorite(result)"
                 >
-                    <mat-icon>{{ result.Favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+                    <mat-icon
+                        [attr.title]="
+                            (result.Favorite
+                                ? 'MOVIES.SET_AS.UNFAVORITE'
+                                : 'MOVIES.SET_AS.FAVORITE'
+                            ) | translate
+                        "
+                        >{{ result.Favorite ? 'favorite' : 'favorite_border' }}</mat-icon
+                    >
+                </div>
+                <div
+                    class="col-md-1 col-12 d-flex align-items-center"
+                    (click)="toggleWatched(result)"
+                >
+                    <mat-icon
+                        [attr.title]="
+                            (result.Watched ? 'MOVIES.SET_AS.UNWATCHED' : 'MOVIES.SET_AS.WATCHED')
+                                | translate
+                        "
+                        >{{ result.Watched ? 'close' : 'done' }}</mat-icon
+                    >
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-12 text-light">
+        <div class="col-md-4 col-12 text-light">
             <h3>{{ 'MOVIES.FAVORITES' | translate }}</h3>
-            <div class="row" *ngFor="let favorite of favorites">
-                <favorite-card
-                    [movie]="favorite"
-                    (removeFavoriteEvent)="removeFavorite($event)"
-                ></favorite-card>
+            <span class="row favorites-container" *ngIf="favorites.length === 0">
+                <div class="col-12 d-flex align-items-center">
+                    {{ 'MOVIES.NO_FAVORITES' | translate }}
+                </div>
+            </span>
+            <div class="row favorites-container" *ngIf="favorites.length > 0">
+                <div class="row favorite-card" *ngFor="let favorite of favorites">
+                    <div
+                        class="col-md-10 col-12 d-flex align-items-center link"
+                        (click)="movieDetails($event, favorite)"
+                    >
+                        <span>{{ favorite.Title }} ({{ favorite.Year }})</span>
+                    </div>
+                    <div class="col-md-2 col-12 d-flex align-items-center">
+                        <mat-icon (click)="removeFavorite(favorite)">close</mat-icon>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mt-4">{{ 'MOVIES.WATCHED' | translate }}</h3>
+            <span class="row watched-container" *ngIf="watchedMovies.length === 0">
+                <div class="col-12 d-flex align-items-center">
+                    {{ 'MOVIES.NO_WATCHED' | translate }}
+                </div>
+            </span>
+            <div class="row watched-container" *ngIf="watchedMovies.length > 0">
+                <div class="row watched-card" *ngFor="let movie of watchedMovies">
+                    <div
+                        class="col-md-10 col-12 d-flex align-items-center link"
+                        (click)="movieDetails($event, movie)"
+                    >
+                        <span>{{ movie.Title }} ({{ movie.Year }})</span>
+                    </div>
+                    <div class="col-md-2 col-12 d-flex align-items-center">
+                        <mat-icon (click)="removeWatched(movie)">close</mat-icon>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

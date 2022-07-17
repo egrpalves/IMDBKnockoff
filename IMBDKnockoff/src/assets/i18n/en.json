@@ -30,6 +30,15 @@
             "BOX_OFFICE": "Box Office"
         },
         "FAVORITES": "Favorites",
-        "NO_RESULTS": "No results found"
+        "NO_FAVORITES": "No favorties yet",
+        "NO_RESULTS": "No results found",
+        "WATCHED": "Watched",
+        "NO_WATCHED": "No watched yet",
+        "SET_AS": {
+            "WATCHED": "Set as watched",
+            "UNWATCHED": "Set as unwatched",
+            "FAVORITE": "Add as favorite",
+            "UNFAVORITE": "Remove from favorites"
+        }
     }
 }
