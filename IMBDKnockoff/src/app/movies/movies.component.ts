@@ -37,16 +37,19 @@ export class MoviesComponent implements OnInit {
         if (imdbIdRegex.test(searchValue)) {
             this.router.navigate(['/movies', searchValue]);
         } else {
-            this.server.getMovie(searchValue).subscribe((data: any) => {
+            this.server.getMovie(searchValue.trim()).subscribe((data: any) => {
                 if (data.Response === 'True') {
                     this.searchDetails = data.Search;
                     this.searchDetails.forEach((item) => {
                         item.Favorite = this.favorites.some((fav) => fav.imdbID === item.imdbID);
                         item.Watched = this.watchedMovies.some((fav) => fav.imdbID === item.imdbID);
                     });
-                } else {
+                } else if (searchValue.trim() !== '') {
                     this.searchErrorMessage = 'MOVIES.NO_RESULTS';
                     this.searchDetails = [];
+                } else {
+                    this.searchDetails = [];
+                    this.searchErrorMessage = '';
                 }
 
                 this.storage.store('search', this.searchDetails);
