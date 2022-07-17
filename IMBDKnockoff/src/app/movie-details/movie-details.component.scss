@@ -45,6 +45,30 @@
         }
     }
 
+    .ratings-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+
+        .rating-source {
+            font-size: 0.75rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+
+            span {
+                padding-top: 3px;
+            }
+
+            mat-icon {
+                color: goldenrod;
+            }
+        }
+    }
+
     .go-back {
         mat-icon {
             cursor: pointer;

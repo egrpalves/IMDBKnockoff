@@ -17,6 +17,18 @@
                         </span>
                     </div>
                 </div>
+                <div
+                    class="col-md-6 col-12 ratings-container"
+                    *ngFor="let item of movieDetails.Ratings"
+                >
+                    <div class="rating-source">
+                        {{ item.Source }}
+                    </div>
+                    <div class="rating">
+                        <mat-icon>star</mat-icon>
+                        <span>{{ item.Value }}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-7 col-12 offset-md-1">
