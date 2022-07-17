@@ -15,6 +15,6 @@ export class ServerService<T> {
     }
 
     public getMovieDetails(id: string): Observable<T> {
-        return this.http.get<T>(`${this.serverUrl}i=${id}`);
+        return this.http.get<T>(`${this.serverUrl}i=${id}&plot=full`);
     }
 }

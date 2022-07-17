@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map } from 'rxjs/internal/operators/map';
 import { MovieDetails } from '../interfaces/movie';
 import { ServerService } from '../services/server.service';
 
@@ -16,7 +17,7 @@ export class MovieDetailsComponent implements OnInit {
         Country: '',
         DVD: '',
         Director: '',
-        Genre: '',
+        Genre: [],
         Language: '',
         Metascore: '',
         Plot: '',
@@ -47,8 +48,8 @@ export class MovieDetailsComponent implements OnInit {
         const id = this.route.snapshot.paramMap.get('id') ?? '';
 
         this.server.getMovieDetails(id).subscribe((data: any) => {
+            data.Genre = data.Genre.split(',');
             this.movieDetails = data;
-            console.log(this.movieDetails);
         });
     }
 }

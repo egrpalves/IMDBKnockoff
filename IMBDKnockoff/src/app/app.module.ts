@@ -5,6 +5,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
 
 @NgModule({
-    declarations: [AppComponent, MoviesComponent, MovieDetailsComponent, NavbarComponent, FavoriteCardComponent],
+    declarations: [
+        AppComponent,
+        MoviesComponent,
+        MovieDetailsComponent,
+        NavbarComponent,
+        FavoriteCardComponent,
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -24,6 +31,7 @@ import { FavoriteCardComponent } from './favorite-card/favorite-card.component';
         FormsModule,
         ReactiveFormsModule,
         MatTableModule,
+        MatIconModule,
         TranslateModule.forRoot({
             defaultLanguage: 'en',
             loader: {

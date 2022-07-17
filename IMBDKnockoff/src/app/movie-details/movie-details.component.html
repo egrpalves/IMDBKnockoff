@@ -1,18 +1,70 @@
 <div class="container">
-    <img src="{{ movieDetails.Poster }}" alt="" />
-    <div class="details">
-        <h2>{{ movieDetails.Title }}</h2>
-        <p>{{ movieDetails.Plot }}</p>
-        <p>{{ movieDetails.Actors }}</p>
-        <p>{{ movieDetails.Director }}</p>
-        <p>{{ movieDetails.Writer }}</p>
-        <p>{{ movieDetails.Awards }}</p>
-        <p>{{ movieDetails.BoxOffice }}</p>
-        <p>{{ movieDetails.Production }}</p>
-        <p>{{ movieDetails.Released }}</p>
-        <p>{{ movieDetails.Rated }}</p>
-        <p>{{ movieDetails.Runtime }}</p>
-        <p>{{ movieDetails.Website }}</p>
-        <p>{{ movieDetails.Year }}</p>
+    <div class="row"></div>
+    <div class="row">
+        <div class="col-md-4 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <img src="{{ movieDetails.Poster }}" alt="" />
+                </div>
+                <div class="col-12">
+                    <div class="genre-container">
+                        <span *ngFor="let item of movieDetails.Genre">
+                            {{ item }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 col-12 offset-md-1">
+            <div class="row">
+                <div class="col-12">
+                    <div class="details-header">
+                        <h1>{{ movieDetails.Title }}</h1>
+                        <div class="info">
+                            <span>
+                                <span>{{ movieDetails.Year }}</span>
+                                <mat-icon>fiber_manual_record</mat-icon>
+                                <span>{{ movieDetails.Runtime }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p>{{ movieDetails.Plot }}</p>
+                </div>
+                <div class="col-12">
+                    <h3>{{ 'MOVIES.DETAILS.ACTORS' | translate }}</h3>
+                    <p>{{ movieDetails.Actors }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.DIRECTOR' | translate }}</h3>
+                    <p>{{ movieDetails.Director }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.WRITER' | translate }}</h3>
+                    <p>{{ movieDetails.Writer }}</p>
+                </div>
+                <div class="col-12">
+                    <h3>{{ 'MOVIES.DETAILS.AWARDS' | translate }}</h3>
+                    <p>{{ movieDetails.Awards }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.BOX_OFFICE' | translate }}</h3>
+                    <p>{{ movieDetails.BoxOffice }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.PRODUCTION' | translate }}</h3>
+                    <p>{{ movieDetails.Production }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.RELEASED' | translate }}</h3>
+                    <p>{{ movieDetails.Released }}</p>
+                </div>
+                <div class="col-md-6 col-12">
+                    <h3>{{ 'MOVIES.DETAILS.RATED' | translate }}</h3>
+                    <p>{{ movieDetails.Rated }}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -12,7 +12,7 @@ export interface MovieDetails extends Movie {
     Country: string;
     DVD: string;
     Director: string;
-    Genre: string;
+    Genre: string[];
     Language: string;
     Metascore: string;
     Plot: string;

@@ -3,4 +3,44 @@
     display: flex;
     gap: 10px;
     color: white;
+
+    .details-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        .info {
+            color: rgb(187, 186, 186);
+            margin-top: -15px;
+
+            mat-icon {
+                font-size: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: -3px;
+            }
+
+            & > span {
+                display: flex;
+            }
+        }
+    }
+
+    h1,
+    h3 {
+        color: rgb(212, 209, 209);
+    }
+
+    .genre-container {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+
+        span {
+            border: 1px solid white;
+            border-radius: 15px;
+            padding: 0.4rem;
+        }
+    }
 }
