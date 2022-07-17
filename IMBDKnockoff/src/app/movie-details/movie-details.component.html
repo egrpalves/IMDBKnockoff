@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-7 col-12 offset-md-1">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-7 col-12">
                     <div class="details-header">
                         <h1>{{ movieDetails.Title }}</h1>
                         <div class="info">
@@ -42,6 +42,20 @@
                                 <mat-icon>fiber_manual_record</mat-icon>
                                 <span>{{ movieDetails.Runtime }}</span>
                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-12 d-flex justify-content-end">
+                    <div class="col-md-6 col-12 ratings-container">
+                        <div class="rating-source">
+                            {{ 'MOVIES.DETAILS.IMDB.RATING' | translate }}
+                        </div>
+                        <div class="rating">
+                            <mat-icon>star</mat-icon>
+                            <div class="d-flex flex-column" style="font-size: 0.75rem">
+                                <span>{{ movieDetails.imdbRating }} / 10</span>
+                                <span>{{ movieDetails.imdbVotes }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>

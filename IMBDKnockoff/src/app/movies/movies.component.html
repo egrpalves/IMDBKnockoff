@@ -26,7 +26,13 @@
                             alt="{{ movie.Title }}"
                         />
                         <div class="movie-card-body">
-                            <h5 class="card-title">{{ movie.Title }}</h5>
+                            <h5
+                                class="card-title link"
+                                (click)="movieDetails(movie)"
+                                [attr.title]="movie.Title + ' (' + movie.Year + ')'"
+                            >
+                                {{ movie.Title }} ({{ movie.Year }})
+                            </h5>
                             <div class="row action-buttons">
                                 <div
                                     class="col-md-6 col-12 d-flex justify-content-center"
