@@ -1,0 +1,52 @@
+<div class="container">
+    <form class="form-inline my-2 my-lg-0 search-container" (ngSubmit)="search(searchValue)">
+        <input
+            class="form-control mr-sm-2"
+            type="search"
+            name="search"
+            [(ngModel)]="searchValue"
+            #searchField="ngModel"
+            placeholder="{{ 'MOVIES.SEARCH_EXAMPLE' | translate }}"
+        />
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+            {{ 'MOVIES.SEARCH' | translate }}
+        </button>
+    </form>
+    <div class="row">
+        <div class="col-md-9 col-12 text-light search-results-container">
+            <div class="row" *ngIf="searchDetails.length === 0 && searchErrorMessage.length > 0">
+                <div class="col-12">
+                    <h5>
+                        {{ searchErrorMessage | translate }}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-2 search-result" *ngFor="let result of searchDetails">
+                <div class="col-md-1 col-12">
+                    <img class="poster" src="{{ result.Poster }}" alt="{{ result.Title }}" />
+                </div>
+                <div class="col-md-8 col-12 offset-md-1 d-flex align-items-center">
+                    <div class="link" (click)="movieDetails($event, result)">
+                        <span>{{ result.Title }}</span>
+                        <span class="ms-2">({{ result.Year }})</span>
+                    </div>
+                </div>
+                <div
+                    class="col-md-1 col-12 d-flex align-items-center"
+                    (click)="addRemoveFavorite(result)"
+                >
+                    <mat-icon>{{ result.Favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-12 text-light">
+            <h3>{{ 'MOVIES.FAVORITES' | translate }}</h3>
+            <div class="row" *ngFor="let favorite of favorites">
+                <favorite-card
+                    [movie]="favorite"
+                    (removeFavoriteEvent)="removeFavorite($event)"
+                ></favorite-card>
+            </div>
+        </div>
+    </div>
+</div>

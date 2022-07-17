@@ -1,0 +1,35 @@
+{
+    "IMDBKNOCKOFF": "IMDBKnockoff",
+    "NAV": {
+        "MOVIES": "Movies"
+    },
+    "MOVIES": {
+        "SEARCH": "Search",
+        "SEARCH_EXAMPLE": "Title, Year or IMDB ID",
+        "DETAILS": {
+            "TITLE": "Title",
+            "YEAR": "Year",
+            "TYPE": "Type",
+            "RATING": "Rating",
+            "RUNTIME": "Runtime",
+            "GENRE": "Genre",
+            "DIRECTOR": "Director",
+            "WRITER": "Writer",
+            "ACTORS": "Cast",
+            "LANGUAGE": "Language",
+            "COUNTRY": "Country",
+            "AWARDS": "Awards",
+            "RATINGS": "Ratings",
+            "RELEASED": "Released",
+            "IMBD": {
+                "RATING": "IMDB Rating",
+                "VOTES": "IMDB Votes"
+            },
+            "RATED": "Rated",
+            "PRODUCTION": "Production",
+            "BOX_OFFICE": "Box Office"
+        },
+        "FAVORITES": "Favorites",
+        "NO_RESULTS": "No results found"
+    }
+}
