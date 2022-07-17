@@ -30,20 +30,26 @@ export class MoviesComponent implements OnInit {
     ngOnInit(): void {}
 
     public search(searchValue: string): void {
-        this.server.getMovie(searchValue).subscribe((data: any) => {
-            if (data.Response === 'True') {
-                this.searchDetails = data.Search;
-                this.searchDetails.forEach((item) => {
-                    item.Favorite = this.favorites.some((fav) => fav.imdbID === item.imdbID);
-                });
-            } else {
-                this.searchErrorMessage = 'MOVIES.NO_RESULTS';
-                this.searchDetails = [];
-            }
+        let imdbIdRegex = /^tt\d+$/;
 
-            this.storage.store('search', this.searchDetails);
-            this.storage.store('searchValue', searchValue);
-        });
+        if (imdbIdRegex.test(searchValue)) {
+            this.router.navigate(['/movies', searchValue]);
+        } else {
+            this.server.getMovie(searchValue).subscribe((data: any) => {
+                if (data.Response === 'True') {
+                    this.searchDetails = data.Search;
+                    this.searchDetails.forEach((item) => {
+                        item.Favorite = this.favorites.some((fav) => fav.imdbID === item.imdbID);
+                    });
+                } else {
+                    this.searchErrorMessage = 'MOVIES.NO_RESULTS';
+                    this.searchDetails = [];
+                }
+
+                this.storage.store('search', this.searchDetails);
+                this.storage.store('searchValue', searchValue);
+            });
+        }
     }
 
     public addRemoveFavorite(movie: Movie): void {

@@ -53,4 +53,8 @@ export class MovieDetailsComponent implements OnInit {
             this.movieDetails = data;
         });
     }
+
+    goBack(): void {
+        this.router.navigate(['..']);
+    }
 }
