@@ -17,9 +17,11 @@ export class MoviesComponent implements OnInit {
     displayedColumns: string[] = ['title', 'year', 'commands'];
     searchErrorMessage: string = '';
     favoriteIcon = 'favorite_border';
+    suggestedIds = ['tt1201607', 'tt0076759', 'tt1490017'];
+    suggestedMovies: Movie[] = [];
 
     constructor(
-        public server: ServerService<Movie[]>,
+        public server: ServerService,
         public storage: StorageService,
         private router: Router
     ) {
@@ -29,7 +31,18 @@ export class MoviesComponent implements OnInit {
         this.searchValue = this.storage.retrieve('searchValue') || '';
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.suggestedIds.forEach((id) => {
+            this.server.getMovieDetails(id).subscribe({
+                next: (result: any) => {
+                    result.Favorite = this.favorites.some((fav) => fav.imdbID === result.imdbID);
+                    result.Watched = this.watchedMovies.some((wat) => wat.imdbID === result.imdbID);
+                    this.suggestedMovies.push(result);
+                },
+                error: (error: any) => this.server.error(),
+            });
+        });
+    }
 
     search(searchValue: string): void {
         let imdbIdRegex = /^tt\d+$/;
@@ -37,23 +50,30 @@ export class MoviesComponent implements OnInit {
         if (imdbIdRegex.test(searchValue)) {
             this.router.navigate(['/movies', searchValue]);
         } else {
-            this.server.getMovie(searchValue.trim()).subscribe((data: any) => {
-                if (data.Response === 'True') {
-                    this.searchDetails = data.Search;
-                    this.searchDetails.forEach((item) => {
-                        item.Favorite = this.favorites.some((fav) => fav.imdbID === item.imdbID);
-                        item.Watched = this.watchedMovies.some((fav) => fav.imdbID === item.imdbID);
-                    });
-                } else if (searchValue.trim() !== '') {
-                    this.searchErrorMessage = 'MOVIES.NO_RESULTS';
-                    this.searchDetails = [];
-                } else {
-                    this.searchDetails = [];
-                    this.searchErrorMessage = '';
-                }
+            this.server.getMovie(searchValue.trim()).subscribe({
+                next: (data: any) => {
+                    if (data.Response === 'True') {
+                        this.searchDetails = data.Search;
+                        this.searchDetails.forEach((item) => {
+                            item.Favorite = this.favorites.some(
+                                (fav) => fav.imdbID === item.imdbID
+                            );
+                            item.Watched = this.watchedMovies.some(
+                                (wat) => wat.imdbID === item.imdbID
+                            );
+                        });
+                    } else if (searchValue.trim() !== '') {
+                        this.searchErrorMessage = 'MOVIES.NO_RESULTS';
+                        this.searchDetails = [];
+                    } else {
+                        this.searchDetails = [];
+                        this.searchErrorMessage = '';
+                    }
 
-                this.storage.store('search', this.searchDetails);
-                this.storage.store('searchValue', searchValue);
+                    this.storage.store('search', this.searchDetails);
+                    this.storage.store('searchValue', searchValue);
+                },
+                error: (error: any) => this.server.error(),
             });
         }
     }
@@ -107,10 +127,10 @@ export class MoviesComponent implements OnInit {
     //#endregion Watched
 
     //#region Movie Details
-    movieDetails(event: any, movie: Movie): void {
-        if (event.srcElement.classList[0] !== 'btn') {
-            this.router.navigate(['/movies', movie.imdbID]);
-        }
+
+    movieDetails(movie: Movie): void {
+        this.router.navigate(['/movies', movie.imdbID]);
     }
+
     //#endregion Movie Details
 }

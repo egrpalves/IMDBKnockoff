@@ -41,7 +41,7 @@ export class MovieDetailsComponent implements OnInit {
     };
 
     constructor(
-        public server: ServerService<MovieDetails>,
+        public server: ServerService,
         private router: Router,
         private route: ActivatedRoute
     ) {}
@@ -49,9 +49,12 @@ export class MovieDetailsComponent implements OnInit {
     ngOnInit(): void {
         const id = this.route.snapshot.paramMap.get('id') ?? '';
 
-        this.server.getMovieDetails(id).subscribe((data: any) => {
-            data.Genre = data.Genre.split(',');
-            this.movieDetails = data;
+        this.server.getMovieDetails(id).subscribe({
+            next: (data: any) => {
+                data.Genre = data.Genre.split(',');
+                this.movieDetails = data;
+            },
+            error: (error: any) => this.server.error(),
         });
     }
 
