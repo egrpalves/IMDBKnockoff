@@ -37,6 +37,7 @@ export class MovieDetailsComponent implements OnInit {
         Year: '',
         imdbID: '',
         Favorite: false,
+        Watched: false,
     };
 
     constructor(

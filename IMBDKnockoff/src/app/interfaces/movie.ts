@@ -4,6 +4,7 @@ export interface Movie {
     imdbID: string;
     Poster: string;
     Favorite: boolean;
+    Watched: boolean;
 }
 
 export interface MovieDetails extends Movie {

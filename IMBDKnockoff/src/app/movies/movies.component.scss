@@ -25,15 +25,64 @@
             width: 50px;
         }
 
-        .link {
-            @extend mat-icon;
+        mat-icon {
+            @extend .link;
+        }
+    }
+
+    .link {
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .favorites-container {
+        max-height: 320px;
+        overflow: auto;
+
+        .favorite-card {
+            min-height: 30px;
             &:hover {
-                text-decoration: underline;
+                mat-icon {
+                    display: block;
+                }
+            }
+
+            .details {
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            mat-icon {
+                display: none;
+                cursor: pointer;
+                font-size: 1rem;
             }
         }
+    }
 
-        mat-icon {
-            cursor: pointer;
+    .watched-container {
+        @extend .favorites-container;
+        .watched-card {
+            min-height: 30px;
+
+            &:hover {
+                mat-icon {
+                    display: block;
+                }
+            }
+
+            mat-icon {
+                display: none;
+                cursor: pointer;
+                font-size: 1rem;
+            }
         }
+    }
+
+    h3 {
+        color: rgb(212, 209, 209);
     }
 }
