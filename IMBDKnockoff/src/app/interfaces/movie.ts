@@ -1,27 +1,36 @@
-import { Rating } from './rating';
-
 export interface Movie {
     Title: string;
     Year: string;
-    Rated: string;
-    Released: string;
-    Runtime: string;
-    Genre: string;
-    Director: string;
-    Writer: string;
+    imdbID: string;
+    Poster: string;
+    Favorite: boolean;
+}
+
+export interface MovieDetails extends Movie {
     Actors: string;
-    Plot: string;
-    Language: string;
-    Country: string;
     Awards: string;
-    Ratings: Array<Rating>;
+    BoxOffice: string;
+    Country: string;
+    DVD: string;
+    Director: string;
+    Genre: string[];
+    Language: string;
     Metascore: string;
+    Plot: string;
+    Production: string;
+    Rated: string;
+    Ratings: Rating[];
+    Released: string;
+    Response: string;
+    Runtime: string;
+    Type: string;
+    Website: string;
+    Writer: string;
     imdbRating: string;
     imdbVotes: string;
-    imdbID: string;
-    Type: string;
-    DVD: string;
-    BoxOffice: string;
-    Production: string;
-    Website: string;
+}
+
+export interface Rating {
+    Source: string;
+    Value: string;
 }

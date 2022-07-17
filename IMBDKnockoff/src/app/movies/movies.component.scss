@@ -1,0 +1,39 @@
+.container {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .search-results-container {
+        max-height: 87vh;
+        overflow: auto;
+    }
+
+    .search-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    h5 {
+        margin-top: 17px;
+    }
+    .search-result {
+        &:hover {
+            background-color: rgb(0 11 20 / 73%);
+        }
+        .poster {
+            width: 50px;
+        }
+
+        .link {
+            @extend mat-icon;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        mat-icon {
+            cursor: pointer;
+        }
+    }
+}

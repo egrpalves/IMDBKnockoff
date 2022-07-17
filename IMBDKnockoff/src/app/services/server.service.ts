@@ -11,6 +11,16 @@ export class ServerService<T> {
     constructor(private http: HttpClient) {}
 
     public getMovie(search: string): Observable<T> {
-        return this.http.get<T>(`${this.serverUrl}t=${search}`);
+        let yearRegex = /\((\d{4})\)/;
+
+        if (yearRegex.test(search)) {
+            return this.http.get<T>(`${this.serverUrl}y=${search}&type=movie`);
+        }
+
+        return this.http.get<T>(`${this.serverUrl}s=${search}&type=movie`);
+    }
+
+    public getMovieDetails(id: string): Observable<T> {
+        return this.http.get<T>(`${this.serverUrl}i=${id}&plot=full`);
     }
 }
