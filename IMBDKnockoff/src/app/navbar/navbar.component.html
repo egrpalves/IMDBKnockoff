@@ -25,5 +25,15 @@
                 </li>
             </ul>
         </div>
+        <mat-button-toggle-group
+            name="language"
+            #group="matButtonToggleGroup"
+            aria-label="Language"
+            [value]="currentLang"
+            (change)="changeLang(group.value)"
+        >
+            <mat-button-toggle value="en">EN</mat-button-toggle>
+            <mat-button-toggle value="pt">PT</mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
 </nav>

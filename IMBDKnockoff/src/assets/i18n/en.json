@@ -5,7 +5,7 @@
     },
     "MOVIES": {
         "SEARCH": "Search",
-        "SEARCH_EXAMPLE": "Title, Year or IMDB ID",
+        "SEARCH_EXAMPLE": "Title, year or IMDB id",
         "DETAILS": {
             "TITLE": "Title",
             "YEAR": "Year",

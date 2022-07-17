@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,8 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTableModule,
         MatIconModule,
         MatSnackBarModule,
+        MatButtonToggleModule,
         TranslateModule.forRoot({
-            defaultLanguage: 'en',
+            defaultLanguage: localStorage.getItem('lang') || 'en',
             loader: {
                 provide: TranslateLoader,
                 useFactory: HttpLoaderFactory,

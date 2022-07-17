@@ -5,6 +5,41 @@
     },
     "MOVIES": {
         "SEARCH": "Pesquisar",
-        "SEARCH_EXAMPLE": "Ex.: Star Wars"
+        "SEARCH_EXAMPLE": "Título, ano ou id do IMDB",
+        "DETAILS": {
+            "TITLE": "Título",
+            "YEAR": "Ano",
+            "TYPE": "Tipo",
+            "RATING": "Avaliação",
+            "RUNTIME": "Duração",
+            "GENRE": "Género",
+            "DIRECTOR": "Diretor",
+            "WRITER": "Escritor",
+            "ACTORS": "Elenco",
+            "LANGUAGE": "Idioma",
+            "COUNTRY": "País",
+            "AWARDS": "Prémios",
+            "RATINGS": "Avaliações",
+            "RELEASED": "Data de lançamento",
+            "IMBD": {
+                "RATING": "Avaliação IMDB",
+                "VOTES": "Votos IMDB"
+            },
+            "RATED": "Classificação",
+            "PRODUCTION": "Produção",
+            "BOX_OFFICE": "Bilheteira"
+        },
+        "FAVORITES": "Favoritos",
+        "NO_FAVORITES": "Sem favoritos",
+        "NO_RESULTS": "Nenhum resultado encontrado",
+        "WATCHED": "Vistos",
+        "NO_WATCHED": "Sem filmes vistos",
+        "SET_AS": {
+            "WATCHED": "Marcar como visto",
+            "UNWATCHED": "Marcar como não visto",
+            "FAVORITE": "Adicionar aos favoritos",
+            "UNFAVORITE": "Remover dos favoritos"
+        },
+        "SUGGESTED": "Filmes sugeridos"
     }
 }
