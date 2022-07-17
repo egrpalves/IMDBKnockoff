@@ -12,6 +12,7 @@ export class FavoriteCardComponent implements OnInit {
         Year: '',
         imdbID: '',
         Poster: '',
+        Favorite: false,
     };
 
     @Input()

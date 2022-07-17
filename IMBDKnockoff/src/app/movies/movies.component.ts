@@ -10,11 +10,12 @@ import { StorageService } from '../services/storage.service';
     styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
-    public searchDetails: Movie[];
-    public favorites: Movie[];
-    public searchValue: string;
-    public displayedColumns: string[] = ['title', 'year', 'commands'];
-    public searchErrorMessage: string = '';
+    searchDetails: Movie[];
+    favorites: Movie[];
+    searchValue: string;
+    displayedColumns: string[] = ['title', 'year', 'commands'];
+    searchErrorMessage: string = '';
+    favoriteIcon = 'favorite_border';
 
     constructor(
         public server: ServerService<Movie[]>,
@@ -32,12 +33,16 @@ export class MoviesComponent implements OnInit {
         this.server.getMovie(searchValue).subscribe((data: any) => {
             if (data.Response === 'True') {
                 this.searchDetails = data.Search;
-                this.storage.store('search', this.searchDetails);
-                this.storage.store('searchValue', searchValue);
+                this.searchDetails.forEach((item) => {
+                    item.Favorite = this.favorites.some((fav) => fav.imdbID === item.imdbID);
+                });
             } else {
                 this.searchErrorMessage = 'MOVIES.NO_RESULTS';
                 this.searchDetails = [];
             }
+
+            this.storage.store('search', this.searchDetails);
+            this.storage.store('searchValue', searchValue);
         });
     }
 
@@ -46,9 +51,11 @@ export class MoviesComponent implements OnInit {
             this.removeFavorite(movie);
         } else {
             this.favorites.push(movie);
-        }
+            movie.Favorite = true;
 
-        this.storage.store('favorites', this.favorites);
+            this.storage.store('search', this.searchDetails);
+            this.storage.store('favorites', this.favorites);
+        }
     }
 
     public movieDetails(event: any, movie: Movie): void {
@@ -59,5 +66,9 @@ export class MoviesComponent implements OnInit {
 
     removeFavorite(movie: any): void {
         this.favorites = this.favorites.filter((item) => item.imdbID !== movie.imdbID);
+        movie.Favorite = false;
+
+        this.storage.store('search', this.searchDetails);
+        this.storage.store('favorites', this.favorites);
     }
 }

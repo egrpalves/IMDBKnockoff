@@ -3,6 +3,7 @@ export interface Movie {
     Year: string;
     imdbID: string;
     Poster: string;
+    Favorite: boolean;
 }
 
 export interface MovieDetails extends Movie {

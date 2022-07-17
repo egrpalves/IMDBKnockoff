@@ -13,38 +13,31 @@
         </button>
     </form>
     <div class="row">
-        <div class="col-md-9 col-12 text-light">
-            <h5 *ngIf="searchDetails.length === 0 && searchErrorMessage.length > 0">
-                {{ searchErrorMessage | translate }}
-            </h5>
-            <table mat-table [dataSource]="searchDetails" matSort *ngIf="searchDetails.length > 0">
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        {{ 'MOVIES.DETAILS.TITLE' | translate }}
-                    </th>
-                    <td mat-cell *matCellDef="let element">{{ element.Title }}</td>
-                </ng-container>
-                <ng-container matColumnDef="year">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        {{ 'MOVIES.DETAILS.YEAR' | translate }}
-                    </th>
-                    <td mat-cell *matCellDef="let element">{{ element.Year }}</td>
-                </ng-container>
-                <ng-container matColumnDef="commands">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let element">
-                        <button class="btn btn-secondary" (click)="addRemoveFavorite(element)">
-                            *
-                        </button>
-                    </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                    mat-row
-                    *matRowDef="let row; columns: displayedColumns"
-                    (click)="movieDetails($event, row)"
-                ></tr>
-            </table>
+        <div class="col-md-9 col-12 text-light search-results-container">
+            <div class="row" *ngIf="searchDetails.length === 0 && searchErrorMessage.length > 0">
+                <div class="col-12">
+                    <h5>
+                        {{ searchErrorMessage | translate }}
+                    </h5>
+                </div>
+            </div>
+            <div class="row mt-2 search-result" *ngFor="let result of searchDetails">
+                <div class="col-md-1 col-12">
+                    <img class="poster" src="{{ result.Poster }}" alt="{{ result.Title }}" />
+                </div>
+                <div class="col-md-8 col-12 offset-md-1 d-flex align-items-center">
+                    <div class="link" (click)="movieDetails($event, result)">
+                        <span>{{ result.Title }}</span>
+                        <span class="ms-2">({{ result.Year }})</span>
+                    </div>
+                </div>
+                <div
+                    class="col-md-1 col-12 d-flex align-items-center"
+                    (click)="addRemoveFavorite(result)"
+                >
+                    <mat-icon>{{ result.Favorite ? 'favorite' : 'favorite_border' }}</mat-icon>
+                </div>
+            </div>
         </div>
         <div class="col-md-3 col-12 text-light">
             <h3>{{ 'MOVIES.FAVORITES' | translate }}</h3>
